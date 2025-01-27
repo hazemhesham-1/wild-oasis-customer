@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+  <img src="./public/logo.png" alt="logo" width="90" height="auto">
+  <h1>Wild Oasis - Customer</h1>
+  <h3>
+    <a href="https://wild-oasis-egy.vercel.app">
+      <strong>Live Site</strong>
+    </a>
+  </h3>
+  <hr>
+</div>
 
-## Getting Started
+<div align="center">
+  
+  ![Status](https://img.shields.io/badge/Status-Completed-success?style=flat)
+  
+</div>
 
-First, run the development server:
+<p align="center">
+Welcome to <b>Wild Oasis</b>! This is the customer version of the <a href="https://github.com/hazemhesham-1/wild-oasis">hotel management</a> web application, where users can view and book cabins based on availability, manage their bookings, and update their profiles. This project was a great learning experience for me as I explored Next.js, NextAuth.js, and other techniques such as Server-Side Rendering (SSR).
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<!-- Screenshot -->
+<a align="center" href="https://wild-oasis-egy.vercel.app">
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![Screenshot](./public/images/IMG-01.png)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+</a>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features
 
-## Learn More
+- View all available cabins with description and images.
+- Book a cabin based on available dates and choose the number of guests.
+- Sign in with Github to manage your bookings.
+- View your reservations, edit them, or cancel if needed.
+- Update your profile information.
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies Used
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Next.js** (App Router)
+- **Tailwind CSS** for styling
+- **Supabase** for the database (shared with the admin app)
+- **NextAuth.js** for authentication (Github sign-in)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Setup Instructions
 
-## Deploy on Vercel
+To run this project locally:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/hazemhesham-1/wild-oasis-customer.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Set up environment variables:
+   - You will need to configure Supabase and NextAuth (Github sign-in). Add your environment variables in a `.env.local` file.
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
+5. Open [http://localhost:3000](http://localhost:3000) to see the app.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
