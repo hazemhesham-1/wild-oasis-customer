@@ -1,7 +1,7 @@
-import { PencilSquareIcon } from "@heroicons/react/24/solid";
-import { format, formatDistance, isPast, isToday, parseISO } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
+import { PencilSquareIcon } from "@heroicons/react/24/solid";
+import { format, formatDistance, isPast, isToday, parseISO } from "date-fns";
 import DeleteReservation from "./DeleteReservation";
 
 function formatDistanceFromNow(dateString) {
@@ -23,61 +23,61 @@ const ReservationCard = ({ booking, onDelete }) => {
     } = booking;
 
     return (
-        <div className="flex border border-primary-800">
-            <div className="relative h-32 aspect-square">
+        <div className="reservation-card">
+            <div className="reservation-card__image">
                 <Image
                     src={image}
                     alt={`Cabin ${name}`}
                     fill
-                    className="object-cover border-r border-primary-800"
+                    className="object-cover"
                 />
             </div>
-            <div className="flex flex-col flex-grow px-6 py-3">
+            <div className="reservation-card__details">
                 <div className="flex items-center justify-between">
                     <h3 className="text-xl font-semibold">
                         {numNights} nights in Cabin {name}
                     </h3>
                     {isPast(new Date(startDate)) ?
-                        <span className="bg-yellow-800 text-yellow-200 rounded-sm flex items-center h-7 px-3 font-bold text-xs uppercase">
+                        <span className="reservation-card__status reservation-card__status--past">
                             past
                         </span>
                         :
-                        <span className="bg-green-800 text-green-200 rounded-sm flex items-center h-7 px-3 font-bold text-xs uppercase">
+                        <span className="reservation-card__status reservation-card__status--upcoming">
                             upcoming
                         </span>
                     }
                 </div>
-                <p className="text-primary-300 text-lg">
+                <p className="text-primary-300 text-base md:text-lg">
                     {format(new Date(startDate), "EEE, MMM dd yyyy")}{" "}
                     ({isToday(new Date(startDate)) ? "Today" : formatDistanceFromNow(startDate)})
                     &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
                 </p>
-                <div className="flex items-baseline gap-5 mt-auto">
+                <div className="reservation-card__booking-info">
                     <p className="text-accent-400 text-xl font-semibold">
-                        ${totalPrice}
+                        {totalPrice} EGP
                     </p>
-                    <p className="text-primary-300">&bull;</p>
-                    <p className="text-primary-300 text-lg">
+                    <p>&bull;</p>
+                    <p className="text-lg">
                         {numGuests} guest{numGuests > 1 && "s"}
                     </p>
-                    <p className="text-primary-400 text-sm ml-auto">
+                    <p className="text-primary-400 ms-auto text-sm">
                         Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}
                     </p>
                 </div>
             </div>
-            <div className="flex flex-col border-l border-primary-800 w-[100px]">
-                {!isPast(new Date(startDate)) &&
+            <div className="reservation-card__actions">
+                {!isPast(new Date(startDate)) && (
                     <>
                         <Link
                             href={`/account/reservations/edit/${id}`}
-                            className="text-primary-300 flex items-center gap-2 flex-grow border-b border-primary-800 px-3 font-bold uppercase text-xs group hover:bg-accent-600 transition-colors hover:text-primary-900"
+                            className="reservation-card__button border-e group xl:border-0 xl:border-b"
                         >
-                            <PencilSquareIcon className="text-primary-600 h-5 w-5 group-hover:text-primary-800 transition-colors"/>
+                            <PencilSquareIcon className="icon group-hover:text-primary-800 transition-colors"/>
                             <span className="mt-1">Edit</span>
                         </Link>
                         <DeleteReservation bookingId={id} onDelete={onDelete}/>
                     </>
-                }
+                )}
             </div>
         </div>
     );

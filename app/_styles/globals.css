@@ -3,28 +3,206 @@
 @tailwind utilities;
 
 @layer components {
+    .homepage {
+        @apply relative text-center z-10;
+    }
+    .homepage__title {
+        @apply text-primary-50 mb-10 text-5xl font-normal tracking-tight sm:text-7xl lg:text-8xl;
+    }
+    .primary-button, .submit-button {
+        @apply bg-accent-500 text-primary-800 p-4 text-base font-semibold hover:bg-accent-600 transition-all lg:px-8;
+    }
+    .secondary-button {
+        @apply bg-primary-800 border border-primary-300 flex items-center gap-6 px-8 py-4 font-medium hover:bg-transparent transition-all lg:px-10 lg:text-lg;
+    }
+    .primary-button {
+        @apply md:px-8 md:py-6 lg:text-lg;
+    }
+    .submit-button {
+        @apply py-2 disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300 sm:py-4;
+    }
+    .message-box, .message-box--centered {
+        @apply flex flex-col items-center justify-center gap-6 text-center;
+    }
+    .message-box {
+        @apply mt-20 lg:mt-0;
+    }
+    .message-box--centered {
+        @apply size-full max-h-screen -mt-16 sm:-mt-20;
+    }
+    .message-box__title {
+        @apply text-2xl font-semibold sm:text-3xl;
+    }
+    .message-box__button {
+        @apply bg-accent-500 text-primary-800 inline-block px-6 py-3 text-lg;
+    }
+    .form-wrapper {
+        @apply bg-primary-900 flex flex-col gap-6 p-4 md:px-6 md:py-8 lg:px-12 lg:text-lg;
+    }
+
+    .about-container {
+        @apply grid grid-cols-1 gap-10 sm:grid-cols-2 sm:grid-rows-[auto_auto_1fr] sm:text-lg lg:grid-cols-[1fr_0.8fr_1fr_1fr_1fr] lg:items-center xl:gap-x-24 xl:gap-y-32;
+    }
+    .about-container__content {
+        @apply sm:row-span-2 lg:col-span-3 lg:row-auto;
+    }
+    .about-container__heading {
+        @apply text-accent-400 mb-5 text-3xl font-medium lg:mb-10 lg:text-4xl;
+    }
+
+    .account-container {
+        @apply grid grid-cols-1 grid-rows-[auto_1fr] gap-12 h-full md:grid-cols-[12rem_1fr] md:grid-rows-1 lg:grid-cols-[16rem_1fr];
+    }
+    .account-container__heading {
+        @apply text-accent-400 mb-7 text-2xl font-semibold;
+    }
+    .account-sidenav {
+        @apply flex flex-col gap-2 h-full text-base lg:text-lg;
+    }
+    .account-sidenav__button {
+        @apply text-primary-200 flex items-center gap-4 px-5 py-3 font-semibold hover:bg-primary-900 hover:text-primary-100 transition-colors;
+    }
+
+    .cabin-list {
+        @apply grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12 xl:gap-14;
+    }
+    .cabin-card {
+        @apply border border-primary-800 grid grid-rows-[1.25fr_1fr] sm:grid-cols-[1fr_1.5fr] sm:grid-rows-none md:grid-cols-none md:grid-rows-[1.25fr_1fr] xl:grid-cols-[1fr_1.5fr] xl:grid-rows-none;
+    }
+    .cabin-card__image {
+        @apply border-b border-primary-800 object-cover sm:border-b-0 sm:border-e md:border-b md:border-e-0 xl:border-b-0 xl:border-e;
+    }
+    .cabin-card__details {
+        @apply bg-primary-950 flex flex-col justify-between;
+    }
+    .cabin-card__title {
+        @apply text-accent-500 mb-3 text-2xl font-semibold;
+    }
+    .cabin-card__button {
+        @apply border-s border-primary-800 inline-block px-6 py-4 hover:bg-accent-600 hover:text-primary-900 transition-all;
+    }
+    .cabin-info {
+        @apply flex items-center gap-3;
+    }
+
+    .cabin-details {
+        @apply border border-primary-800 grid grid-rows-[1fr_2fr] gap-3 mb-12 p-3 sm:grid-rows-[1fr_1.25fr] lg:grid-cols-[3fr_4fr] lg:grid-rows-none lg:gap-20 lg:mb-24 lg:px-10 lg:py-3;
+    }
+    .cabin-details__image-wrapper {
+        @apply relative lg:scale-[1.15] lg:-translate-x-3;
+    }
+    .cabin-details__title {
+        @apply bg-primary-950 text-accent-100 mb-5 pb-1 text-3xl font-black whitespace-nowrap lg:w-3/2 lg:px-6 lg:pt-6 lg:-translate-x-64 lg:text-7xl;
+    }
+    .cabin-details__description {
+        @apply text-primary-300 mb-10 text-lg;
+    }
+    .cabin-details__list {
+        @apply flex flex-col gap-4 md:mb-7;
+    }
+
+    .header {
+        @apply border-b border-primary-900 px-4 py-3 sm:px-8 sm:py-5;
+    }
+    .header__container {
+        @apply flex items-center justify-between relative w-full max-w-7xl mx-auto z-20;
+    }
+
+    .logo {
+        @apply flex items-center gap-2 sm:gap-4;
+    }
+    .logo__icon-wrapper {
+        @apply relative aspect-square h-10 sm:h-12 lg:h-15;
+    }
+    .logo__name {
+        @apply text-primary-100 text-lg font-semibold whitespace-nowrap group-hover:text-accent-400 transition sm:hidden md:inline-block md:text-xl;
+    }
+
+    .navigation {
+        @apply bg-primary-900/80 backdrop-blur fixed inset-0 p-4 ease-in-out duration-300 sm:bg-transparent sm:backdrop-blur-none sm:static sm:p-0;
+    }
+    .navigation__list {
+        @apply flex flex-col items-center gap-10 size-full py-10 overflow-hidden sm:flex-row sm:gap-16 sm:p-0;
+    }
+    .navigation__item {
+        @apply text-primary-100 text-2xl font-medium sm:text-lg lg:text-xl hover:text-accent-400 transition;
+    }
+    .navigation__account-link {
+        @apply flex flex-col-reverse items-center gap-4 sm:flex-row;
+    }
+    .navigation__button {
+        @apply text-accent-100 inline-flex items-center justify-center size-12 p-2 z-50 sm:hidden focus:outline-none;
+    }
+
+    .reservation {
+        @apply border border-primary-800 grid min-h-[400px] lg:grid-cols-[2fr_1.5fr];
+    }
+    .reservation__user-info {
+        @apply bg-primary-800 text-primary-300 flex items-center justify-between px-8 py-4 sm:px-16 lg:px-8 lg:py-2 xl:px-16;
+    }
+    .reservation__form {
+        @apply bg-primary-900 flex flex-col gap-5 px-8 py-10 text-lg sm:px-16 lg:px-8 xl:px-16;
+    }
+    .reservation__form-input {
+        @apply bg-primary-200 text-primary-800 rounded-sm w-full px-5 py-3 shadow-sm;
+    }
+
+    .reservation-banner {
+        @apply bg-accent-500 text-primary-800 rounded-full flex items-center gap-3 fixed bottom-6 left-1/2 -translate-x-1/2 w-full max-w-96 px-8 py-5 font-semibold shadow-xl shadow-slate-900 sm:gap-8 sm:max-w-max;
+    }
+
+    .reservation-card {
+        @apply border border-primary-800 flex flex-col flex-wrap sm:flex-row md:flex-col lg:flex-row;
+    }
+    .reservation-card__image {
+        @apply border-b border-primary-800 relative aspect-square h-32 sm:border-e md:border-e-0 lg:border-b-0 lg:border-e;
+    }
+    .reservation-card__details {
+        @apply flex flex-col flex-grow gap-4 p-6 sm:py-3 lg:gap-1;
+    }
+    .reservation-card__booking-info {
+        @apply text-primary-300 flex flex-wrap items-baseline gap-5 mt-auto;
+    }
+    .reservation-card__actions {
+        @apply border-t border-primary-800 flex w-full xl:border-0 xl:border-s xl:flex-col xl:w-25;
+    }
+    .reservation-card__button {
+        @apply text-primary-300 border-primary-800 flex items-center justify-center flex-grow gap-2 px-3 py-4 text-xs font-bold uppercase hover:bg-accent-600 hover:text-primary-900 transition-colors xl:justify-start xl:py-0;
+    }
+    .reservation-card__status {
+        @apply rounded-sm flex items-center h-7 px-3 text-xs font-bold uppercase;
+    }
+    .reservation-card__status--past {
+        @apply bg-yellow-800 text-yellow-200;
+    }
+    .reservation-card__status--upcoming {
+        @apply bg-green-800 text-green-200;
+    }
+
+    .select-date__summary {
+        @apply bg-accent-500 text-primary-800 flex flex-col justify-between gap-2 px-8 py-2 md:flex-row lg:flex-col xl:flex-row xl:items-center;
+    }
+    .select-date__summary-details {
+        @apply grid grid-cols-[1fr_60px] items-baseline gap-x-6 max-w-64 sm:grid-cols-[1fr_80px_1fr] sm:max-w-fit;
+    }
+    .select-date__clear-button {
+        @apply border border-primary-800 px-4 py-2 text-sm font-semibold hover:bg-accent-400 transition-colors xl:py-1;
+    }
+
     .spinner {
-        border: 8px solid theme("colors.primary.900");
-        border-right-color: theme("colors.primary.200");
-        border-radius: 50%;
-        margin: 50px auto 25px;
-        height: 60px;
-        width: 60px;
-        animation: rotate infinite 1s linear;
+        @apply border-8 border-primary-900 border-r-primary-200 rounded-full size-16 mx-auto mt-12 mb-6 animate-spin;
     }
     .spinner-mini {
-        border: 2px solid theme("colors.primary.200");
-        border-right-color: transparent;
-        border-radius: 50%;
-        margin: 0;
-        height: 20px;
-        width: 20px;
-        animation: rotate infinite 1s linear;
+        @apply border-2 border-primary-200 border-r-transparent rounded-full size-5 m-0 animate-spin;
     }
-    @keyframes rotate {
-        to {
-            transform: rotate(360deg);
-        }
+}
+
+@layer utilities {
+    .form-field {
+        @apply bg-primary-200 text-primary-800 rounded-sm w-full px-2 py-3 shadow-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400 lg:px-5;
+    }
+    .icon {
+        @apply text-primary-600 size-5;
     }
 }
 
@@ -35,4 +213,10 @@
     --rdp-day_button-width: 32px !important;
     --rdp-accent-color: theme("colors.accent.500") !important;
     --rdp-accent-background-color: theme("colors.accent.600") !important;
+}
+
+@media (max-width: 640px) {
+    .rdp-months {
+        flex-direction: column;
+    }
 }

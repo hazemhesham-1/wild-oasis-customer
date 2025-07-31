@@ -1,6 +1,6 @@
-import { UserIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
+import { UsersIcon } from "@heroicons/react/24/solid";
 
 const CabinCard = ({ cabin }) => {
     const {
@@ -13,44 +13,46 @@ const CabinCard = ({ cabin }) => {
     } = cabin;
 
     return (
-        <div className="flex border-primary-800 border">
-            <div className="relative flex-1">
+        <div className="cabin-card">
+            <div className="relative">
                 <Image
                     src={image}
                     fill
                     alt={`Cabin ${name}`}
-                    className="object-cover border-r border-primary-800"
+                    className="cabin-card__image"
                 />
             </div>
-            <div className="flex-grow">
-                <div className="pt-5 pb-4 px-7 bg-primary-950">
-                    <h3 className="text-accent-500 font-semibold text-2xl mb-3">
+            <div className="cabin-card__details">
+                <div className="px-7 pt-5 pb-4">
+                    <h3 className="cabin-card__title">
                         Cabin {name}
                     </h3>
-                    <div className="flex items-center gap-3 mb-2">
-                        <UserIcon className="h-5 w-5 text-primary-600"/>
-                        <p className="text-lg text-primary-200">
-                            For up to <span className="font-bold">{maxCapacity}</span> guests
+                    <div className="cabin-info mb-5">
+                        <UsersIcon className="icon"/>
+                        <p className="text-primary-200 text-lg">
+                            For up to <strong>{maxCapacity}</strong> guests
                         </p>
                     </div>
-                    <p className="flex gap-3 justify-end items-baseline">
-                        {discount > 0 ?
+                    <p className="flex items-baseline justify-end gap-3">
+                        {discount > 0 ? (
                             <>
-                                <span className="text-3xl font-[350]">${regularPrice - discount}</span>
-                                <span className="line-through font-semibold text-primary-600">
-                                    ${regularPrice}
+                                <span className="text-3xl font-normal">
+                                    {regularPrice - discount} EGP
+                                </span>
+                                <span className="text-primary-600 font-semibold line-through">
+                                    {regularPrice} EGP
                                 </span>
                             </>
-                            : <span className="text-3xl font-[350]">${regularPrice}</span>
-                        }
+                        ) : (
+                            <span className="text-3xl font-normal">
+                                {regularPrice} EGP
+                            </span>
+                        )}
                         <span className="text-primary-200">/ night</span>
                     </p>
                 </div>
-                <div className="bg-primary-950 border-t border-t-primary-800 text-right">
-                    <Link
-                        href={`/cabins/${id}`}
-                        className="border-l border-primary-800 px-6 py-4 inline-block hover:bg-accent-600 transition-all hover:text-primary-900"
-                    >
+                <div className="border-t border-t-primary-800 text-end">
+                    <Link href={`/cabins/${id}`} className="cabin-card__button">
                         Details & reservation &rarr;
                     </Link>
                 </div>

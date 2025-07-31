@@ -14,16 +14,15 @@ const DeleteReservation = ({ bookingId, onDelete }) => {
     }
 
     return (
-        <button
-            className="text-primary-300 flex items-center gap-2 flex-grow px-3 font-bold uppercase text-xs group hover:bg-accent-600 transition-colors hover:text-primary-900"
-            onClick={handleDelete}
-        >
-            {!isPending ?
+        <button onClick={handleDelete} className="reservation-card__button group">
+            {!isPending ? (
                 <>
-                    <TrashIcon className="text-primary-600 h-5 w-5 group-hover:text-primary-800 transition-colors"/>
+                    <TrashIcon className="icon group-hover:text-primary-800 transition-colors"/>
                     <span className="mt-1">Delete</span>
-                </> : <span className="mx-auto"><SpinnerMini/></span>
-            }
+                </>
+            ) : (
+                <span className="mx-auto"><SpinnerMini/></span>
+            )}
         </button>
     );
 };

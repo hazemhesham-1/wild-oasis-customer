@@ -1,9 +1,14 @@
 import NextAuth from "next-auth";
+import Google from "next-auth/providers/google";
 import GitHub from "next-auth/providers/github";
 import { createGuest, getGuest } from "./data-service";
 
 const authConfig = {
     providers: [
+        Google({
+            clientId: process.env.AUTH_GOOGLE_ID,
+            clientSecret: process.env.AUTH_GOOGLE_SECRET,
+        }),
         GitHub({
             clientId: process.env.AUTH_GITHUB_ID,
             clientSecret: process.env.AUTH_GITHUB_SECRET,
@@ -15,7 +20,7 @@ const authConfig = {
         },
         async signIn({ user, account, profile }) {
             if(!user.email) {
-                user.email = `${user.name.replace(/-/g, '')}@mail.com`;
+                user.email = `${user.name.replace(/-/g, "")}@wildoasis.com`;
             }
             try {
                 const existingGuest = await getGuest(user.email);

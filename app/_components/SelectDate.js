@@ -3,13 +3,15 @@
 import { differenceInDays, isPast, isSameDay, isWithinInterval } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
-import { useReservation } from "../_contexts/ReservationContext";
+import { useReservation } from "@/app/_contexts/ReservationContext";
 
 function isAlreadyBooked(range, dateArr) {
-    if(range?.from && range?.to) {
-        return dateArr.some((date) =>
-            isWithinInterval(date, { start: range.from, end: range.to })
-        );
+    const start = range?.from;
+    const end = range?.to;
+    const isInRange = (date) => isWithinInterval(date, { start, end });
+
+    if(start && end) {
+        return dateArr.some((date) => isInRange(date));
     }
     return false;
 }
@@ -25,13 +27,13 @@ const SelectDate = ({ bookedDates, cabin, settings }) => {
         min_booking_length: minBookingLength
     } = settings;
 
-    const numNights = differenceInDays(displayRange?.to, displayRange?.from);
+    const numNights = differenceInDays(displayRange?.to, displayRange?.from) || null;
     const cabinPrice = numNights * (regularPrice - discount);
 
     return (
         <div className="flex flex-col justify-between">
             <DayPicker
-                className="pt-12 place-self-center"
+                className="place-self-center py-6 xl:pt-12"
                 mode="range"
                 selected={displayRange}
                 onSelect={setRange}
@@ -44,40 +46,36 @@ const SelectDate = ({ bookedDates, cabin, settings }) => {
                 disabled={(currDate) => isPast(currDate) || bookedDates.some((date) => isSameDay(date, currDate))}
                 excludeDisabled
             />
-            <div className="bg-accent-500 text-primary-800 flex items-center justify-between px-8 h-[72px]">
-                <div className="flex items-baseline gap-6">
-                    <p className="flex items-baseline gap-2">
-                        {discount > 0 ?
+            <div className="select-date__summary">
+                <div className="select-date__summary-details">
+                    <p className="flex items-baseline gap-2 whitespace-nowrap">
+                        {discount > 0 ? (
                             <>
-                                <span className="text-2xl">${regularPrice - discount}</span>
-                                <span className="text-primary-700 font-semibold line-through">${regularPrice}</span>
+                                <span className="text-lg sm:text-2xl">{regularPrice - discount} EGP</span>
+                                <span className="text-primary-700 font-semibold line-through">{regularPrice} EGP</span>
                             </>
-                            : <span className="text-2xl">${regularPrice}</span>
-                        }
+                        ) : (
+                            <span className="text-lg sm:text-2xl">{regularPrice} EGP</span>
+                        )}
                         <span>/night</span>
                     </p>
-                    {numNights ?
+                    {numNights && (
                         <>
-                            <p className="bg-accent-600 px-3 py-2 text-2xl">
-                                <span>&times;</span> <span>{numNights}</span>
+                            <p className="bg-accent-600 px-3 py-0.5 text-lg sm:text-2xl">
+                                <span>&times;</span>{" "}<span>{numNights}</span>
                             </p>
-                            <p>
-                                <span className="text-lg font-bold uppercase">Total</span>{" "}
-                                <span className="text-2xl font-semibold">${cabinPrice}</span>
+                            <p className="whitespace-nowrap">
+                                <span className="font-bold uppercase sm:text-lg">Total</span>{" "}
+                                <span className="text-lg font-semibold sm:text-2xl">{cabinPrice} EGP</span>
                             </p>
                         </>
-                        : null
-                    }
+                    )}
                 </div>
-                {range?.from || range?.to ?
-                    <button
-                        className="border border-primary-800 px-4 py-2 text-sm font-semibold"
-                        onClick={resetRange}
-                    >
+                {(range?.from || range?.to) && (
+                    <button className="select-date__clear-button" onClick={resetRange}>
                         Clear
                     </button>
-                    : null
-                }
+                )}
             </div>
         </div>
     );

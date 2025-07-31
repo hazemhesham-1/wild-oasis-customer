@@ -2,16 +2,16 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-const Button = ({ children, filter, handleFilter, activeFilter }) => {
+const Button = ({ children, filter, handleFilter, isActive }) => {
     return (
         <button
-            className={`px-5 py-2 hover:bg-primary-700 ${filter === activeFilter ? "bg-primary-700 text-primary-50" : ""}`}
+            className={`${isActive ? "bg-primary-700 text-primary-50" : ""} px-5 py-2 hover:bg-primary-700 focus:outline-none`}
             onClick={() => handleFilter(filter)}
         >
             {children}
         </button>
     );
-}
+};
 
 const Filter = () => {
     const searchParams = useSearchParams();
@@ -20,6 +20,25 @@ const Filter = () => {
 
     const activeFilter = searchParams?.get("capacity") || "all";
 
+    const filters = [
+        {
+            label: "All cabins",
+            value: "all"
+        },
+        {
+            label: "1—3 guests",
+            value: "small"
+        },
+        {
+            label: "4—7 guests",
+            value: "medium"
+        },
+        {
+            label: "8—12 guests",
+            value: "large"
+        },
+    ];
+
     function handleFilter(filter) {
         const params = new URLSearchParams(searchParams);
         params.set("capacity", filter);
@@ -27,35 +46,17 @@ const Filter = () => {
     }
 
     return (
-        <div className="flex border border-primary-800">
-            <Button
-                filter="all"
-                handleFilter={handleFilter}
-                activeFilter={activeFilter}
-            >
-                All cabins
-            </Button>
-            <Button
-                filter="small"
-                handleFilter={handleFilter}
-                activeFilter={activeFilter}
-            >
-                1&mdash;3 guests
-            </Button>
-            <Button
-                filter="medium"
-                handleFilter={handleFilter}
-                activeFilter={activeFilter}
-            >
-                4&mdash;7 guests
-            </Button>
-            <Button
-                filter="large"
-                handleFilter={handleFilter}
-                activeFilter={activeFilter}
-            >
-                8&mdash;12 guests
-            </Button>
+        <div className="border border-primary-800 flex">
+            {filters.map((filter) => (
+                <Button
+                    key={filter.value}
+                    filter={filter.value}
+                    handleFilter={handleFilter}
+                    isActive={filter.value === activeFilter}
+                >
+                    {filter.label}
+                </Button>
+            ))}
         </div>
     );
 };

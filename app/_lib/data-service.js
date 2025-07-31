@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
-import { supabase } from "./supabase";
 import { eachDayOfInterval } from "date-fns";
+import { supabase } from "./supabase";
 
-async function getCabin(id) {
+export async function getCabin(id) {
     const { data, error } = await supabase.from("cabins").select("*").eq("id", id).single();
     if(error) {
         console.error(error);
@@ -12,7 +12,7 @@ async function getCabin(id) {
     return data;
 }
 
-async function getCabinPrice(id) {
+export async function getCabinPrice(id) {
     const { data, error } = await supabase.from("cabins").select("regular_price, discount").eq("id", id).single();
     if(error) {
         console.error(error);
@@ -21,7 +21,7 @@ async function getCabinPrice(id) {
     return data;
 }
 
-async function getCabins() {
+export async function getCabins() {
     const { data, error } = await supabase.from("cabins").select("id, name, max_capacity, regular_price, discount, image").order("name");
     if(error) {
         throw new Error("Cabins could not be loaded");
@@ -30,12 +30,12 @@ async function getCabins() {
     return data;
 }
 
-async function getGuest(email) {
+export async function getGuest(email) {
     const { data } = await supabase.from("guests").select("*").eq("email", email).single();
     return data;
 }
 
-async function getBooking(id) {
+export async function getBooking(id) {
     const { data, error } = await supabase.from("bookings").select("*").eq("id", id).single();
     if(error) {
         console.error(error);
@@ -45,7 +45,7 @@ async function getBooking(id) {
     return data;
 }
 
-async function getBookings(guestId) {
+export async function getBookings(guestId) {
     const { data, error } = await supabase.from("bookings").select("id, created_at, start_date, end_date, num_nights, num_guests, total_price, guest_id, cabin_id, cabins(name, image)").eq("guest_id", guestId).order("start_date");
     if(error) {
         console.error(error);
@@ -55,7 +55,7 @@ async function getBookings(guestId) {
     return data;
 }
 
-async function getBookedDatesByCabinId(cabinId) {
+export async function getBookedDatesByCabinId(cabinId) {
     let today = new Date();
     today.setUTCHours(0, 0, 0, 0);
     today = today.toISOString();
@@ -76,7 +76,7 @@ async function getBookedDatesByCabinId(cabinId) {
     return bookedDates;
 }
 
-async function getSettings() {
+export async function getSettings() {
     const { data, error } = await supabase.from("settings").select("*").single();
     if(error) {
         console.error(error);
@@ -86,7 +86,7 @@ async function getSettings() {
     return data;
 }
 
-async function getCountries() {
+export async function getCountries() {
     const BASE_URL = process.env.NEXTAUTH_URL;
     try {
         const res = await fetch(`${BASE_URL}/api/data/countries`);
@@ -99,7 +99,20 @@ async function getCountries() {
     }
 }
 
-async function createGuest(newGuest) {
+export async function getCountry(countryCode) {
+    const BASE_URL = process.env.NEXTAUTH_URL;
+    try {
+        const res = await fetch(`${BASE_URL}/api/data/countries?code=${countryCode}`);
+        const { data: country } = await res.json();
+        return country;
+    }
+    catch(error) {
+        console.error(error);
+        throw new Error("Country could not be loaded");
+    }
+}
+
+export async function createGuest(newGuest) {
     const { data, error } = await supabase.from("guests").insert([newGuest]);
     if(error) {
         console.error(error);
@@ -109,7 +122,7 @@ async function createGuest(newGuest) {
     return data;
 }
 
-async function updateGuest(id, updateFields) {
+export async function updateGuest(id, updateFields) {
     const { data, error } = await supabase.from("guests").update(updateFields).eq("id", id).select().single();
     if(error) {
         console.error(error);
@@ -119,7 +132,7 @@ async function updateGuest(id, updateFields) {
     return data;
 }
 
-async function createBooking(newBooking) {
+export async function createBooking(newBooking) {
     const { data, error } = await supabase.from("bookings").insert([newBooking]).select().single();
     if(error) {
         console.error(error);
@@ -129,7 +142,7 @@ async function createBooking(newBooking) {
     return data;
 }
 
-async function updateBooking(id, updateFields) {
+export async function updateBooking(id, updateFields) {
     const { data, error } = await supabase.from("bookings").update(updateFields).eq("id", id).select().single();
     if(error) {
         console.error(error);
@@ -139,7 +152,7 @@ async function updateBooking(id, updateFields) {
     return data;
 }
 
-async function deleteBooking(id) {
+export async function deleteBooking(id) {
     const { data, error } = await supabase.from("bookings").delete().eq("id", id);
     if(error) {
         console.error(error);
@@ -148,5 +161,3 @@ async function deleteBooking(id) {
 
     return data;
 }
-
-export { getBooking, getBookings, getBookedDatesByCabinId, getCabin, getCabinPrice, getCabins, getCountries, getGuest, getSettings, createGuest, updateGuest, createBooking, updateBooking, deleteBooking };

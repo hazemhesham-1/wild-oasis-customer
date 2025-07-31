@@ -1,15 +1,15 @@
-import SubmitButton from "@/app/_components/SubmitButton";
-import { updateBooking } from "@/app/_lib/actions";
 import { auth } from "@/app/_lib/auth";
+import { updateBooking } from "@/app/_lib/actions";
 import { getBooking, getBookings, getCabin } from "@/app/_lib/data-service";
+import SubmitButton from "@/app/_components/SubmitButton";
 
-const metadata = {
+export const metadata = {
     title: "Edit Reservation"
 };
 
 const Page = async ({ params }) => {
     const session = await auth();
-    const { bookingId } = params;
+    const { bookingId } = await params;
 
     const guestBookings = await getBookings(session.user.guestId);
     const guestBookingIds = guestBookings.map((booking) => booking.id);
@@ -27,33 +27,32 @@ const Page = async ({ params }) => {
 
     return (
         <div>
-            <h2 className="text-accent-400 font-semibold text-2xl mb-7">
+            <h2 className="account-container__heading">
                 Edit Reservation #{bookingId}
             </h2>
-            <form
-                className="bg-primary-900 flex flex-col gap-6 px-12 py-8 text-lg"
-                action={updateBooking}
-            >
+            <form action={updateBooking} className="form-wrapper">
                 <input
                     type="hidden"
                     name="bookingId"
                     defaultValue={bookingId}
                 />
                 <div className="space-y-2">
-                    <label htmlFor="numGuests">How many guests?</label>
+                    <label htmlFor="numGuests">
+                        How many guests?
+                    </label>
                     <select
                         name="numGuests"
                         id="numGuests"
                         defaultValue={numGuests}
-                        className="bg-primary-200 text-primary-800 rounded-sm px-5 py-3 w-full shadow-sm"
+                        className="reservation__form-input"
                         required
                     >
                         <option value="">Select number of guests...</option>
-                        {Array.from({ length: maxCapacity }, (a, i) => i + 1).map((num) =>
+                        {Array.from({ length: maxCapacity }, (_, i) => i + 1).map((num) => (
                             <option key={num} value={num}>
                                 {num} {num > 1 ? "guests" : "guest"}
                             </option>
-                        )}
+                        ))}
                     </select>
                 </div>
                 <div className="space-y-2">
@@ -62,8 +61,9 @@ const Page = async ({ params }) => {
                     </label>
                     <textarea
                         name="observations"
+                        id="observations"
                         defaultValue={observations}
-                        className="bg-primary-200 text-primary-800 rounded-sm px-5 py-3 w-full shadow-sm"
+                        className="reservation__form-input"
                     />
                 </div>
                 <div className="flex items-center justify-end gap-6">
@@ -73,7 +73,5 @@ const Page = async ({ params }) => {
         </div>
     );
 };
-
-export { metadata };
 
 export default Page;

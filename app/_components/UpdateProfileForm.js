@@ -1,6 +1,6 @@
 "use client";
 
-import { updateGuest } from "../_lib/actions";
+import { updateGuest } from "@/app/_lib/actions";
 import SubmitButton from "./SubmitButton";
 
 const UpdateProfileForm = ({ children, guest }) => {
@@ -8,41 +8,40 @@ const UpdateProfileForm = ({ children, guest }) => {
         full_name: fullName,
         email,
         nationality,
-        national_id: nationalID,
-        country_flag: countryFlag
+        countryFlag,
+        national_id: nationalID
     } = guest;
 
     return (
-        <form
-            className="bg-primary-900 px-12 py-8 text-lg flex flex-col gap-6"
-            action={updateGuest}
-        >
+        <form action={updateGuest} className="form-wrapper">
             <div className="space-y-2">
                 <label>Full name</label>
                 <input
-                    className="bg-primary-200 text-primary-800 rounded-sm px-5 py-3 w-full shadow-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
                     name="full_name"
-                    disabled
                     defaultValue={fullName}
+                    disabled
+                    className="form-field"
                 />
             </div>
             <div className="space-y-2">
                 <label>Email address</label>
                 <input
-                    className="bg-primary-200 text-primary-800 rounded-sm px-5 py-3 w-full shadow-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
                     name="email"
-                    disabled
                     defaultValue={email}
+                    disabled
+                    className="form-field"
                 />
             </div>
             <div className="space-y-2">
                 <div className="flex items-center justify-between">
                     <label htmlFor="nationality">Where are you from?</label>
-                    <img
-                        src={countryFlag}
-                        alt={`${nationality}-flag`}
-                        className="h-5 rounded-sm"
-                    />
+                    {nationality && (
+                        <img
+                            src={countryFlag}
+                            alt={`${nationality} flag`}
+                            className="rounded-sm h-5"
+                        />
+                    )}
                 </div>
                 {children}
             </div>
@@ -51,11 +50,11 @@ const UpdateProfileForm = ({ children, guest }) => {
                 <input
                     name="national_id"
                     id="national_id"
-                    className="bg-primary-200 text-primary-800 rounded-sm px-5 py-3 w-full shadow-sm"
                     defaultValue={nationalID}
+                    className="form-field"
                 />
             </div>
-            <div className="flex justify-end items-center gap-6">
+            <div className="flex items-center justify-end gap-6">
                 <SubmitButton>Update profile</SubmitButton>
             </div>
         </form>

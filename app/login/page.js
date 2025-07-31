@@ -1,20 +1,19 @@
-import SignInButton from "../_components/SignInButton";
+import SignInButton from "@/app/_components/SignInButton";
 
-const metadata = {
+export const metadata = {
     title: "Login",
 };
 
 const Page = () => {
     return (
-        <div className="flex flex-col gap-10 items-center mt-10">
-            <h2 className="text-3xl font-semibold">
+        <div className="flex flex-col items-center gap-10 mt-10">
+            <h2 className="text-xl font-semibold sm:text-3xl">
                 Sign in to access your guest area
             </h2>
-            <SignInButton/>
+            <SignInButton provider="google"/>
+            <SignInButton provider="github"/>
         </div>
     );
 };
-
-export { metadata };
 
 export default Page;

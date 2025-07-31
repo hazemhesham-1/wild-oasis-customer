@@ -2,30 +2,27 @@ import Image from "next/image";
 import Link from "next/link";
 import background from "@/public/background.png";
 
-function Home() {
-  return (
-    <main className="mt-24">
-      <Image
-        src={background}
-        fill
-        placeholder="blur"
-        quality={80}
-        className="object-cover object-top"
-        alt="Hotel swimming pool view"
-      />
-      <div className="relative z-10 text-center">
-        <h1 className="text-8xl text-primary-50 mb-10 tracking-tight font-normal">
-          Welcome to paradise
-        </h1>
-        <Link
-          href="/cabins"
-          className="bg-accent-500 px-8 py-6 text-primary-800 text-lg font-semibold hover:bg-accent-600 transistion-all"
-        >
-          Explore luxury cabins
-        </Link>
-      </div>
-    </main>
-  );
-}
+const Homepage = () => {
+    return (
+        <main className="flex items-center justify-center size-full">
+            <Image
+                src={background}
+                fill
+                placeholder="blur"
+                quality={80}
+                className="object-cover object-top"
+                alt="Modern cabin surrounded by a foggy forest in the mountains beside a calm river, with warm interior lighting and a deck overlooking the water."
+            />
+            <div className="homepage">
+                <h1 className="homepage__title">
+                    Welcome to paradise
+                </h1>
+                <Link href="/cabins" className="primary-button mx-auto">
+                    Explore luxury cabins
+                </Link>
+            </div>
+        </main>
+    );
+};
 
-export default Home;
+export default Homepage;

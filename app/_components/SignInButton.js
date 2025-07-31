@@ -1,16 +1,37 @@
-import { signInAction } from "../_lib/actions";
+import { signInAction } from "@/app/_lib/actions";
 
-const SignInButton = () => {
+const providers = {
+    google: {
+        label: "Continue with Google",
+        image: {
+            src: "https://authjs.dev/img/providers/google.svg",
+            alt: "Google logo",
+        },
+    },
+    github: {
+        label: "Continue with GitHub",
+        image: {
+            src: "https://authjs.dev/img/providers/github.svg",
+            alt: "Github logo",
+        },
+    },
+};
+
+const SignInButton = ({ provider = "google" }) => {
+    const { label, image } = providers[provider];
+
+    const signInWithProvider = signInAction.bind(null, provider);
+
     return (
-        <form action={signInAction}>
-            <button className="flex items-center gap-6 text-lg bg-primary-800 border border-primary-300 px-10 py-4 font-medium">
+        <form action={signInWithProvider}>
+            <button className="secondary-button">
                 <img
-                    src="https://authjs.dev/img/providers/github.svg"
-                    alt="Github logo"
+                    src={image.src}
+                    alt={image.alt}
                     height="24"
                     width="24"
                 />
-                <span>Continue with Github</span>
+                <span>{label}</span>
             </button>
         </form>
     );

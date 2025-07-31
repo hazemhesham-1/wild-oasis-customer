@@ -1,8 +1,8 @@
 "use client";
 
 import { useOptimistic } from "react";
+import { deleteBooking } from "@/app/_lib/actions";
 import ReservationCard from "./ReservationCard";
-import { deleteBooking } from "../_lib/actions";
 
 const ReservationList = ({ bookings }) => {
     const [optimisticBookings, optimisticDelete] = useOptimistic(bookings, (currBookings, bookingId) => {
@@ -16,13 +16,13 @@ const ReservationList = ({ bookings }) => {
 
     return (
         <ul className="space-y-6">
-            {optimisticBookings.map((booking) =>
+            {optimisticBookings.map((booking) => (
                 <ReservationCard
+                    key={booking.id}
                     booking={booking}
                     onDelete={handleDelete}
-                    key={booking.id}
                 />
-            )}
+            ))}
         </ul>
     );
 };

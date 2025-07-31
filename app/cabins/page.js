@@ -1,24 +1,25 @@
 import { Suspense } from "react";
-import CabinList from "../_components/CabinList";
-import Spinner from "../_components/Spinner";
-import Filter from "../_components/Filter";
-import ReservationReminder from "../_components/ReservationReminder";
+import CabinList from "@/app/_components/CabinList";
+import Spinner from "@/app/_components/Spinner";
+import Filter from "@/app/_components/Filter";
+import ReservationReminder from "@/app/_components/ReservationReminder";
 
 export const revalidate = 3600;
 
-const metadata = {
+export const metadata = {
     title: "Cabins",
 };
 
-const Page = ({ searchParams }) => {
-    const filter = searchParams?.capacity || "all";
+const Page = async ({ searchParams }) => {
+    const query = await searchParams;
+    const filter = query?.capacity || "all";
 
     return (
         <div>
-            <h1 className="text-4xl mb-5 text-accent-400 font-medium">
+            <h1 className="text-accent-400 mb-5 text-4xl font-medium">
                 Our Luxury Cabins
             </h1>
-            <p className="text-primary-200 text-lg mb-10">
+            <p className="text-primary-200 mb-10 text-lg">
                 Luxurious cozy cabins set in a stunning natural landscape, surrounded by majestic mountains, towering palms, and a lush forest.
                 Through high-quality images and interactive tours, guests can experience the tranquil beauty and rustic charm of the property, offering a peaceful retreat in the heart of nature.
                 Enjoy nature's beauty in your own little home away from home. The perfect spot for a peaceful, calm vacation. Welcome to paradise.
@@ -33,7 +34,5 @@ const Page = ({ searchParams }) => {
         </div>
     );
 };
-
-export { metadata };
 
 export default Page;

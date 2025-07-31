@@ -3,15 +3,16 @@ import Link from "next/link";
 
 const Logo = () => {
     return (
-        <Link href="/" className="flex items-center gap-4 z-10">
-            <Image
-                src="/logo.png"
-                height="100"
-                quality={100}
-                width="100"
-                alt="The Wild Oasis logo"
-            />
-            <span className="text-xl font-semibold text-primary-100">
+        <Link href="/" className="logo group">
+            <div className="logo__icon-wrapper">
+                <Image
+                    src="/logo.png"
+                    fill
+                    quality={100}
+                    alt="The Wild Oasis logo"
+                />
+            </div>
+            <span className="logo__name">
                 The Wild Oasis
             </span>
         </Link>

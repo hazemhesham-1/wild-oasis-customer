@@ -2,24 +2,24 @@ import { getCountries } from "@/app/_lib/data-service";
 
 const SelectCountry = async ({ defaultCountry, name, id, className }) => {
     const countries = await getCountries();
-    const flag = countries.find((country) => country.name === defaultCountry)?.flags.svg ?? "";
+    const code = countries.find((country) => country.name === defaultCountry)?.code ?? "";
     
     return (
         <select
             name={name}
             id={id}
-            defaultValue={`${defaultCountry}%${flag}`}
             className={className}
+            defaultValue={`${defaultCountry}%${code}`}
         >
-            <option value="" key="">Select country...</option>
-            {countries.map((country) =>
+            <option value="">Select country...</option>
+            {countries.map((country) => (
                 <option
                     key={country.name}
-                    value={`${country.name}%${country.flags.svg}`}
+                    value={`${country.name}%${country.code}`}
                 >
                     {country.name}
                 </option>
-            )}
+            ))}
         </select>
     );
 };

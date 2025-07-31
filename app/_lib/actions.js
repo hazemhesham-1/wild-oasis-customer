@@ -11,6 +11,8 @@ import {
     getBookings
 } from "./data-service";
 
+const AUTH_PROVIDERS = ["google", "github"];
+
 async function updateGuest(formData) {
     const session = await auth();
     if(!session) {
@@ -18,15 +20,15 @@ async function updateGuest(formData) {
     }
 
     const national_id = formData.get("national_id");
-    const [nationality, country_flag] = formData.get("nationality").split("%");
+    const [nationality, country_code] = formData.get("nationality").split("%");
 
-    const regex = /^[a-zA-Z0-9]{6,12}$/;
+    const regex = /^[a-zA-Z0-9]{6,14}$/;
     if(!regex.test(national_id)) {
         throw new Error("Please provide a valid national ID");
     }
 
-    const updateData = { national_id, nationality, country_flag };
-    const data = await updateGuestAPI(session.user.guestId, updateData);
+    const updateData = { national_id, nationality, country_code };
+    await updateGuestAPI(session.user.guestId, updateData);
     revalidatePath("/account/profile");
 }
 
@@ -91,12 +93,16 @@ async function deleteBooking(bookingId) {
         throw new Error("You are not allowed to delete this booking");
     }
     
-    const data = await deleteBookingAPI(bookingId);
+    await deleteBookingAPI(bookingId);
     revalidatePath("/account/reservations");
 }
 
-async function signInAction() {
-    await signIn("github", { redirectTo: "/account" });
+async function signInAction(provider, formData) {
+    if(!AUTH_PROVIDERS.includes(provider)) {
+        throw new Error("Invalid authentication provider");
+    }
+
+    await signIn(provider, { redirectTo: "/account" });
 }
 
 async function signOutAction() {

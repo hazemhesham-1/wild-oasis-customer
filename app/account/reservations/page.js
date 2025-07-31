@@ -1,8 +1,8 @@
-import ReservationList from "@/app/_components/ReservationList";
 import { auth } from "@/app/_lib/auth";
 import { getBookings } from "@/app/_lib/data-service";
+import ReservationList from "@/app/_components/ReservationList";
 
-const metadata = {
+export const metadata = {
     title: "Reservations",
 };
 
@@ -12,26 +12,24 @@ const Page = async () => {
 
     return (
         <div>
-            <h2 className="font-semibold text-2xl text-accent-400 mb-7">
+            <h2 className="account-container__heading">
                 Your reservations
             </h2>
-            {bookings.length === 0 ?
-                <p className="text-lg">
-                    You have no reservations yet.
-                    Check out our {" "}
-                    <a
-                        href="/cabins"
-                        className="underline text-accent-500"
-                    >
-                        luxury cabins &rarr;
-                    </a>
+            {bookings.length === 0 ? (
+                <p className="flex flex-col gap-1.5 text-lg lg:flex-row">
+                    <span>You have no reservations yet.</span>
+                    <span>
+                        Check out our{" "}
+                        <a href="/cabins" className="text-accent-500 underline hover:text-accent-400 transition">
+                            luxury cabins &rarr;
+                        </a>
+                    </span>
                 </p>
-                : <ReservationList bookings={bookings}/>
-            }
+            ) : (
+                <ReservationList bookings={bookings}/>
+            )}
         </div>
     );
 };
-
-export { metadata };
 
 export default Page;
