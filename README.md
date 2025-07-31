@@ -1,6 +1,6 @@
 <div align="center">
-    <img src="./public/logo.png" alt="Wild Oasis logo" width="90" height="auto"/>
-    <h1>🏕️ Wild Oasis Website</h1>
+    <img src="./public/logo.png" alt="The Wild Oasis logo" width="90" height="auto"/>
+    <h2>🏕️ The Wild Oasis - Booking Website</h2>
     <h3>
         <a href="https://wild-oasis-egy.vercel.app">
             <strong>Live Site</strong>
@@ -17,42 +17,44 @@
 
 
 <p align="center">
-Welcome to <strong>Wild Oasis (Booking Website)</strong>! This is the customer version of the <a href="https://github.com/hazemhesham-1/wild-oasis">hotel management</a> web application. Whether you're here to learn, contribute, or just explore, you're very welcome! 😊
+Welcome to <strong>The Wild Oasis</strong>! This is the customer version of the <a href="https://github.com/hazemhesham-1/wild-oasis">hotel management</a> web application. Whether you're here to learn, contribute, or just explore, you're very welcome! 😊
 </p>
 
 
 <a align="center" href="https://wild-oasis-egy.vercel.app">
 
-![Wild Oasis Website Homepage](./public/screenshots/wild-oasis-homepage.png)
+![The Wild Oasis Website Homepage](./public/screenshots/wild-oasis-homepage.png)
 
 </a>
 
 
 ## 📋 Overview
 
-A Cabin Booking Web Application that allows users to browse available cabins, create bookings, manage reservations, and update their profile details. This project was a great learning experience where I explored technologies like **Next.js (App Router)**, **Auth.js**, **Supabase**. It demonstrates how to build a secure, dynamic, and user-friendly booking platform from scratch.
+**The Wild Oasis** is a Cabin Booking Web Application that allows users to browse available cabins, create bookings, manage reservations, and update their profile details. This project was a great learning experience where I explored technologies like **Next.js (App Router)**, **Auth.js**, **Supabase**. It demonstrates how to build a secure, dynamic, and user-friendly booking platform from scratch.
 
 
 ## 🌟 Project Features
 
-- ### 1. 🏡 View Available Cabins
-    - Browse a list of all available cabins, complete with descriptions, images, and key details to help users choose the perfect stay.
-    - Filter by number of guests to quickly find cabins that match your group size and needs.
+#### 1. 🏡 View Available Cabins
+- Browse a list of all available cabins, complete with descriptions, images, and key details to help users choose the perfect stay.
+- Filter by number of guests to quickly find cabins that match your group size and needs.
 
-- ### 2. 📅 Cabin Booking
-    - Select your desired dates and number of guests to check real-time availability and book a cabin with ease.
+#### 2. 📅 Cabin Booking
+- Select your desired dates and number of guests to check real-time availability and book a cabin with ease.
+- Total booking cost is dynamically calculated based on selected dates.
+- Users can add additional notes or special observations during booking (e.g. arrival time, special requests, allergies).
 
-- ### 3. 🔐 Secure Authentication
-    - Authenticate securely using your Google or GitHub account via Auth.js to access booking features and manage your profile.
+#### 3. 🔐 Secure Authentication
+- Authenticate securely using your Google or GitHub account via Auth.js to access booking features and manage your profile.
 
-- ### 4. 📖 Manage Your Reservations
-    - Easily view all your current and past bookings, with options to edit or cancel upcoming reservations.
+#### 4. 📖 Manage Your Reservations
+- Easily view all your current and past bookings, with options to edit or cancel upcoming reservations.
 
-- ### 5. 🙋‍♂️ Update Profile Information
-    - Keep your account information up to date by editing your personal details directly from your profile page.
+#### 5. 🙋‍♂️ Update Profile Information
+- Keep your account information up to date by editing your personal details directly from your profile page.
 
-- ### 6. 📱 Fully Responsive Design
-    - Enjoy a seamless experience across all devices with a mobile-first, responsive layout that adapts beautifully to phones, tablets, and desktops.
+#### 6. 📱 Fully Responsive Design
+- Enjoy a seamless experience across all devices with a mobile-first, responsive layout that adapts beautifully to phones, tablets, and desktops.
 
 
 ## 📸 Screenshots
@@ -107,10 +109,11 @@ You can check out the live version of the app here: 👉 **[View Live Site](http
 
 ## 🛠️ Technologies Used
 
-- **Next.js** – React framework for building full-stack, server-rendered web applications.
+- **Next.js** – React framework for server-side rendering and static site generation.
 - **React** – Core library for building UI components.
 - **Tailwind CSS** – Utility-first CSS framework for styling and responsive design.
 - **Supabase** – Persistent data storage for cabins, users, and bookings.
+- **React DayPicker** – Interactive calendar and date selection.
 - **Auth.js (NextAuth)** – Authentication and session management using Google and GitHub OAuth.
 - **Vercel** – Deployment platform for frontend and serverless functions.
 
